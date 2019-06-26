@@ -3,14 +3,26 @@ var path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-    entry: './src/app.js',
+    
+    // mode: 'development',
+
+    entry: {
+        app: './src/app.js',
+    },
+
+    devServer: {
+        historyApiFallback: true,
+    },
 
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, 'public')
+        path: path.resolve(__dirname, 'public'),
+        publicPath: '/'
     },
 
     watch: true,
+
+    // performance: { hints: false },
 
     module:{
         rules: [
@@ -20,7 +32,7 @@ module.exports = {
                 use: [{
                     loader: 'babel-loader',
                     query:{
-                        presets: ['@babel/preset-env']
+                        presets: ['@babel/preset-env', '@babel/react']
                     }
                 }]
             }

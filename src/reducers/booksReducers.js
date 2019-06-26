@@ -1,8 +1,26 @@
 "use strict"
 
 // BOOKS REDUCERS
-export function booksReducers(state={books:[]}, action){
+export function booksReducers(state={
+    books:[{
+                _id: 1,
+                title: 'this is the book title',
+                description: 'this is the book description',
+                price: 55.5
+            },
+            {
+                _id: 2,
+                title: 'this is the second book title',
+                description: 'this is the second book description',
+                price: 51.5
+            }]
+}, action){
     switch(action.type){
+        case "GET_BOOKS":
+            // let books = state.books.concat(action.payload)
+            return {...state, books:[...state.books]}
+            break;
+
         case "POST_BOOK":
             // let books = state.books.concat(action.payload)
             return {books:[...state.books, ...action.payload]}
@@ -13,7 +31,7 @@ export function booksReducers(state={books:[]}, action){
             const currentBookToDelete = [...state.books]
             // Determine at which index in books array is the book to be deleted
             const indexToDelete = currentBookToDelete.findIndex(function(book){
-                return book.id === action.payload.id;
+                return book._id == action.payload;
             })
             // use slice to remove the book at the specified index
             return {books:[...currentBookToDelete.slice(0, indexToDelete), ...currentBookToDelete.slice(indexToDelete + 1)]}
@@ -24,7 +42,7 @@ export function booksReducers(state={books:[]}, action){
             const currentBookToUpdate = [...state.books]
             // Determine at which index in books array is the book to be updated
             const indexToUpdate = currentBookToUpdate.findIndex(function(book){
-                return book.id === action.payload.id;
+                return book._id === action.payload._id;
             })
             // Create a new book object with the new values and with the same array index of the item we want to replace. To achieve this we will use ...spread but we could use concat methods to
             const newBookToUpdate = {
