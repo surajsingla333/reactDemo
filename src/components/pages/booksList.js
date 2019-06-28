@@ -3,7 +3,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {getBooks} from '../../actions/booksActions';
-import {Container, Col, Row,Button} from 'react-bootstrap';
+import {Carousel, Container, Col, Row,Button} from 'react-bootstrap';
 
 import BookItem from './bookItem';
 import BooksForm from './booksForm';
@@ -23,6 +23,7 @@ class BookList extends React.Component{
                         _id={booksArr._id}
                         title={booksArr.title}
                         description={booksArr.description}
+                        images={booksArr.images}
                         price= {booksArr.price}/>
                 </Col>
             )
@@ -30,12 +31,34 @@ class BookList extends React.Component{
         return(
             <Container>
                 <Row>
-                    <Cart />
+                    <Carousel>
+                        <Carousel.Item>
+                        <img
+                            className="d-block w-100"
+                            src="/images/1.jpeg"
+                            alt="First slide"
+                        />
+                        <Carousel.Caption>
+                            <h3>First slide label</h3>
+                            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        </Carousel.Caption>
+                        </Carousel.Item>
+                        <Carousel.Item>
+                        <img
+                            className="d-block w-100"
+                            src="/images/2.jpeg"
+                            alt="Third slide"
+                        />
+
+                        <Carousel.Caption>
+                            <h3>Second slide label</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </Carousel.Caption>
+                        </Carousel.Item>
+                    </Carousel>
                 </Row>
                 <Row>
-                    <Col xs={12} sm={6}>
-                        <BooksForm />
-                    </Col>
+                    <Cart />
                 </Row>
                 <Row style={{marginTop: '15px'}}>
                     {booksList}

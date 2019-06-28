@@ -1,7 +1,7 @@
 "use strict"
 
 import React from 'react'
-import {Row, Col, Button, Container} from 'react-bootstrap'
+import {Row, Col, Button, Container, Image} from 'react-bootstrap'
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {addToCart, updateCart} from '../../actions/cartActions';
@@ -13,6 +13,7 @@ class BookItem extends React.Component{
             _id:this.props._id,
             title:this.props.title,
             description:this.props.description,
+            images: this.props.images,
             price:this.props.price,
             quantity:1
         }]
@@ -28,24 +29,37 @@ class BookItem extends React.Component{
                 this.props.addToCart(book);
             } else {
                 // WE NEED TO INCEREMENT QUANTITY
-                this.props.updateCart(_id,1)
+                this.props.updateCart(_id,1, this.props.cart);
                 // console.log("\n\n\n\nWAY TO UPDATE\n\n\n\n")
             }
 
         } else {
             this.props.addToCart(book);
         }
-
-        // this.props.addToCart(book);
+    }
+    constructor(){
+        super();
+        this.state={
+            isClicked: false;
+        };
+    }
+    onReadMore(){
+        this.setState({isClicked:true})
     }
 
     render(){
         return(
             <Container>
                 <Row>
-                    <Col sx={12} sm={6}>
+                    <Col xs={12} sm={4}>
+                        <Image src={this.props.images} response/>
+                    </Col>
+                    <Col xs={12} sm={6}>
                         <h5>{this.props.title}</h5>
-                        <p>{this.props.description}</p>
+                        <p>{(this.props.description.length > 50 && this.state.isClicked === false)?(this.props.description.substring(0,50)):(this.props.description)}
+                            <button className='link' onClick={this.onReadMore.bind(this)}>{(this.state.isClicked === false && this.props.description !== null && this.props.description.length > 50)?('...read more'):('')}
+                            </button>
+                        </p>
                         <h6> usd. {this.props.price}</h6>
                         <Button variant='primary' onClick={this.handleCart.bind(this)}>Buy Now</Button>
                     </Col>

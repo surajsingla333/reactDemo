@@ -8,7 +8,8 @@ import {Provider} from 'react-redux';
 import {Route, Switch, BrowserRouter as Router, HashRouter} from 'react-router-dom';
 
 import {applyMiddlewarem, createStore, applyMiddleware} from 'redux';
-import logger from 'redux-logger'
+import logger from 'redux-logger';
+import thunk from 'redux-thunk';
 
 // IMPORT COMBINED REDUCERS
 import reducers from './reducers/index'
@@ -18,7 +19,7 @@ import {addToCart} from './actions/cartActions'
 import {postBooks, deleteBooks, updateBooks} from './actions/booksActions'
 
 // STEP 1 create store
-const middleware = applyMiddleware(logger);
+const middleware = applyMiddleware(thunk, logger);
 
 const store = createStore(reducers, middleware);
 

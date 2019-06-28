@@ -2,36 +2,48 @@
 
 export function cartReducers(state={cart:[]}, action) {
     switch(action.type){
+
+        case "GET_CART":
+            return{...state,
+                cart: action.payload,
+                totalAmount: totals(action.payload).amount,
+                totalQty: totals(action.payload).quantity}
+
         case "ADD_TO_CART":
             return {...state, cart:action.payload,
             totalAmount: totals(action.payload).amount,
             totalQty: totals(action.payload).quantity
             };
             break;
+
         case "DELETE_CART_ITEM":
             return {...state, cart:action.payload,
             totalAmount: totals(action.payload).amount,
             totalQty: totals(action.payload).quantity};
             break;
+
         case "UPDATE_CART":
-            // console.log("\n\n\nIN UPDATING CART\n\n\n\n");
-            // Create a copy of the current array of books
-            const currentBookToUpdate = [...state.cart]
-            // Determine at which index in books array is the book to be updated
-            const indexToUpdate = currentBookToUpdate.findIndex(function(book){
-                return book._id === action._id;
-            })
+           
+            // // console.log("\n\n\nIN UPDATING CART\n\n\n\n");
+            // // Create a copy of the current array of books
+            // const currentBookToUpdate = [...state.cart]
+            // // Determine at which index in books array is the book to be updated
+            // const indexToUpdate = currentBookToUpdate.findIndex(function(book){
+            //     return book._id === action._id;
+            // })
 
-            const newBookToUpdate = {
-                ...currentBookToUpdate[indexToUpdate],
-                quantity: currentBookToUpdate[indexToUpdate].quantity + action.unit
-            }    
+            // const newBookToUpdate = {
+            //     ...currentBookToUpdate[indexToUpdate],
+            //     quantity: currentBookToUpdate[indexToUpdate].quantity + action.unit
+            // }    
 
-            let cartUpdate = [...currentBookToUpdate.slice(0, indexToUpdate), newBookToUpdate, ...currentBookToUpdate.slice(indexToUpdate + 1)]
+            // let cartUpdate = [...currentBookToUpdate.slice(0, indexToUpdate), newBookToUpdate, ...currentBookToUpdate.slice(indexToUpdate + 1)]
+
             // console.log("\n\n\nLEAVIN  G UPDATING CART\n\n\n\n");
-            return {...state, cart:cartUpdate,
-            totalAmount: totals(cartUpdate).amount,
-            totalQty: totals(cartUpdate).quantity}
+
+            return {...state, cart:action.payload,
+            totalAmount: totals(action.payload).amount,
+            totalQty: totals(action.payload).quantity}
             break;
     }
     return state
