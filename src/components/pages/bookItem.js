@@ -40,7 +40,7 @@ class BookItem extends React.Component{
     constructor(){
         super();
         this.state={
-            isClicked: false;
+            isClicked: false,
         };
     }
     onReadMore(){
@@ -52,7 +52,7 @@ class BookItem extends React.Component{
             <Container>
                 <Row>
                     <Col xs={12} sm={4}>
-                        <Image src={this.props.images} response/>
+                        <Image src={this.props.images} fluid/>
                     </Col>
                     <Col xs={12} sm={6}>
                         <h5>{this.props.title}</h5>

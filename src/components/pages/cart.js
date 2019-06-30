@@ -95,7 +95,7 @@ class Cart extends React.Component{
             )
         }, this)
         return(
-            <Container header="Cart" variant='primary'>
+            <Container header="Cart" variant='primary' style={{marginTop:'100px'}}>
                 {cartItemsList}
                 <Row>
                     <Col>

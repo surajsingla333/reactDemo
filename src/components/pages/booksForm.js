@@ -90,7 +90,7 @@ class BooksForm extends React.Component{
         }, this)
 
         return (
-            <Container>
+            <Container style={{marginTop:'100px'}}>
             <Row>
                 <Col xs={12} sm={6}>
                     <Form>
@@ -109,7 +109,7 @@ class BooksForm extends React.Component{
                             {imgList}
                         </DropdownButton>
                     </InputGroup>
-                    < Image src={this.state.img} responsive />
+                    < Image src={this.state.img}/>
                     </Form>
                 </Col>
                 <Col xs={12} sm={6}>

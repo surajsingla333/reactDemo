@@ -1,84 +1,90 @@
-"use strict"
+// "use strict"
 
-//React
+// //React
+// import React from 'react';
+// import {render} from 'react-dom';
+// import {Provider} from 'react-redux';
+// //React-Router
+// import {BrowserRouter as Router} from 'react-router-dom';
+
+// import {applyMiddlewarem, createStore, applyMiddleware} from 'redux';
+// import logger from 'redux-logger';
+// import thunk from 'redux-thunk';
+
+// // IMPORT COMBINED REDUCERS
+// import reducers from './reducers/index'
+
+// // IMPORT ACTIONS
+// import {addToCart} from './actions/cartActions'
+// // import {postBooks, deleteBooks, updateBooks} from './actions/booksActions'
+
+// // STEP 1 create store
+// const middleware = applyMiddleware(thunk, logger);
+
+// const initialState = window.INITIAL_STATE;
+
+// const store = createStore(reducers, initialState, middleware);
+
+// // import BooksList from './components/pages/booksList';
+// // import BooksForm from './components/pages/booksForm';
+// // import Cart from './components/pages/cart';
+// // import Main from './main';
+
+// import routes from './routes'
+
+// const Routes = (
+//     <Provider store={store}>
+//         {/* <Router>
+//             <Main />
+//             <Switch>
+//                 <Route path='/' exact component={BooksList}/>
+//                 <Route path='/admin' component={BooksForm}/>
+//                 <Route path='cart' component={Cart}/>
+//             </Switch>
+//         </Router> */}
+//         {routes}
+//     </Provider>
+// )
+
+
+
+// render(
+//     Routes, document.getElementById('app')
+// )
+
+
+"use strict"
+// REACT
 import React from 'react';
 import {render} from 'react-dom';
 import {Provider} from 'react-redux';
-//React-Router
-import {Route, Switch, BrowserRouter as Router, HashRouter} from 'react-router-dom';
+// REACT-ROUTER
+import {BrowserRouter} from 'react-router-dom';
+//import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 
-import {applyMiddlewarem, createStore, applyMiddleware} from 'redux';
+import {applyMiddleware, createStore} from 'redux';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 
 // IMPORT COMBINED REDUCERS
-import reducers from './reducers/index'
-
+import reducers from './reducers/index';
 // IMPORT ACTIONS
-import {addToCart} from './actions/cartActions'
-import {postBooks, deleteBooks, updateBooks} from './actions/booksActions'
+import {addToCart} from './actions/cartActions';
+// STEP 1 create the store
+const middleware =applyMiddleware(thunk, logger);
+// WE WILL PASS INITIAL STATE FROM SERVER STORE
+const initialState = window.INITIAL_STATE;
+const store = createStore(reducers,initialState, middleware);
 
-// STEP 1 create store
-const middleware = applyMiddleware(thunk, logger);
-
-const store = createStore(reducers, middleware);
-
-import BooksList from './components/pages/booksList';
-import BooksForm from './components/pages/booksForm';
-import Cart from './components/pages/cart';
-import Main from './main';
-
+import routes from './routes'
 const Routes = (
-    <Provider store={store}>
-        <Router>
-            <Main />
-            <Switch>
-                <Route path='/' exact component={BooksList}/>
-                <Route path='/admin' component={BooksForm}/>
-                <Route path='cart' component={Cart}/>
-            </Switch>
-        </Router>
-    </Provider>
+  <Provider store={store}>
+    <BrowserRouter>
+      {routes}
+    </BrowserRouter>
+  </Provider>
 )
-
-
 
 render(
-    Routes, document.getElementById('app')
-)
-
-// // STEP 2 create and dispatch actions
-// store.dispatch(postBooks(
-//     [{
-//         id: 1,
-//         title: 'this is the book title',
-//         description: 'this is the book description',
-//         price: 55.5
-//     },
-//     {
-//         id: 2,
-//         title: 'this is the second book title',
-//         description: 'this is the second book description',
-//         price: 51.5
-//     }]
-// ));
-
-// // DELETE a book
-// store.dispatch(deleteBooks(
-//     {id:1}
-// ));
-
-// // UPDATE a book
-// store.dispatch(updateBooks(
-//     {
-//         id: 2,
-//         title: 'this is the second book NEW title',
-//         description: 'this is the second book NEW description'
-//     }
-// ));
-
-
-// // --->> CART ACTIONS <<---
-
-// // ADD to cart
-// store.dispatch(addToCart([{id:2}]));
+  Routes, document.getElementById('app')
+);

@@ -1,3 +1,7 @@
+require('@babel/register')({
+  "presets":["@babel/preset-env", "@babel/preset-react"]
+})
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -5,6 +9,9 @@ var logger = require('morgan');
 
 //PROXY
 var httpProxy = require('http-proxy');
+
+// REQUEST HANDLER FOR SERVER_SIDE RENDERING
+var requestHandler = require('./requestHandler.js');
 
 // var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
@@ -22,18 +29,13 @@ app.use('/api', function(req, res){
 // END PROXY
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+// app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-// app.use('/', indexRouter);
-// app.use('/users', usersRouter);
-app.get('*', function(req,res){
-    res.sendFile(path.resolve(__dirname, 'public', 'index.html'))
-})
+app.use(requestHandler);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -51,5 +53,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+// export default app;
 
 module.exports = app;

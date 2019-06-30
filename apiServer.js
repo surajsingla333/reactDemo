@@ -14,7 +14,16 @@ app.use(cookieParser());
 
 // APIs
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/bookshop');
+
+const CONNECTION_URL = 'mongodb+srv://saral_suraj:74jbmsyk@clusterreact-mtlkk.mongodb.net/bookshop?retryWrites=true&w=majority'
+const DATABASE_NAME = "bookshop";
+
+
+// MONGO ATLAS
+mongoose.connect(CONNECTION_URL)
+
+// LOCAL DB
+// mongoose.connect('mongodb://localhost:27017/bookshop');
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, '# MongoDB - connection error: '));
@@ -160,3 +169,5 @@ app.listen(3001, function(err){
   }
   console.log("API server is listening on 3001")
 })
+
+module.exports = app;

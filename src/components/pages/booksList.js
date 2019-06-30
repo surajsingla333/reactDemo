@@ -29,7 +29,7 @@ class BookList extends React.Component{
             )
         })
         return(
-            <Container>
+            <Container style={{marginTop:'100px'}}>
                 <Row>
                     <Carousel>
                         <Carousel.Item>
@@ -57,9 +57,9 @@ class BookList extends React.Component{
                         </Carousel.Item>
                     </Carousel>
                 </Row>
-                <Row>
+                {/* <Row>
                     <Cart />
-                </Row>
+                </Row> */}
                 <Row style={{marginTop: '15px'}}>
                     {booksList}
                 </Row>
