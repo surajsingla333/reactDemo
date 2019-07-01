@@ -15,15 +15,15 @@ app.use(cookieParser());
 // APIs
 var mongoose = require('mongoose');
 
-const CONNECTION_URL = 'mongodb+srv://saral_suraj:74jbmsyk@clusterreact-mtlkk.mongodb.net/bookshop?retryWrites=true&w=majority'
-const DATABASE_NAME = "bookshop";
+const url = 'mongodb://localhost:27017/bookshop';
 
+const CONNECTION_URL = 'mongodb+srv://saral_suraj:74jbmsyk@clusterreact-mtlkk.mongodb.net/bookshop?retryWrites=true&w=majority';
 
 // MONGO ATLAS
-mongoose.connect(CONNECTION_URL)
+mongoose.connect(CONNECTION_URL);
 
 // LOCAL DB
-// mongoose.connect('mongodb://localhost:27017/bookshop');
+// mongoose.connect(url);
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, '# MongoDB - connection error: '));
