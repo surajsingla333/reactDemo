@@ -18,7 +18,7 @@ var mongoose = require('mongoose');
 
 const url = 'mongodb://localhost:27017/bookshop';
 
-const CONNECTION_URL = `mongodb+srv://${keys.username}:${keys.password}@clusterreact-mtlkk.mongodb.net/${keys.database}?retryWrites=true&w=majority`;
+const CONNECTION_URL = `mongodb+srv://saral_suraj:74jbmsyk@clusterreact-mtlkk.mongodb.net/bookshop?retryWrites=true&w=majority`;
 // 'mongodb+srv://saral_suraj:74jbmsyk@clusterreact-mtlkk.mongodb.net/bookshop?retryWrites=true&w=majority';
 
 // MONGO ATLAS
