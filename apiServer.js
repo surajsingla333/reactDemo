@@ -3,6 +3,7 @@ var express = require('express');
 var cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
+var keys = require('./keys');
 
 var app = express();
 
@@ -17,16 +18,21 @@ var mongoose = require('mongoose');
 
 const url = 'mongodb://localhost:27017/bookshop';
 
-const CONNECTION_URL = 'mongodb+srv://saral_suraj:74jbmsyk@clusterreact-mtlkk.mongodb.net/bookshop?retryWrites=true&w=majority';
+const CONNECTION_URL = `mongodb+srv://${keys.username}:${keys.password}@clusterreact-mtlkk.mongodb.net/${keys.database}?retryWrites=true&w=majority`;
+// 'mongodb+srv://saral_suraj:74jbmsyk@clusterreact-mtlkk.mongodb.net/bookshop?retryWrites=true&w=majority';
 
 // MONGO ATLAS
-mongoose.connect(CONNECTION_URL);
+mongoose.connect(CONNECTION_URL, { useNewUrlParser: true,  useUnifiedTopology: true });
 
 // LOCAL DB
 // mongoose.connect(url);
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, '# MongoDB - connection error: '));
+db.once('open', function() {
+    console.log("We are connected to DB");
+    // addRandomValue();
+})
 
 // --->> SET UP SESSIONS <<----
 app.use(session({
@@ -82,6 +88,7 @@ app.post('/books', function(req, res){
 
 // --->> GET BOOKS <<-----
 app.get('/books', function(req, res){
+    console.log("GETTING BOOKS");
   Books.find(function(err, books){
     if(err){
       console.log("\n\n");
